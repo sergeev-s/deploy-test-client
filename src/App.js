@@ -6,7 +6,7 @@ function App() {
 
   async function fetchData() {
     try {
-      const response = await axios.get(`${window.location.host}:6060/time`);
+      const response = await axios.get(`http://${window.location.hostname}:8080/time`);
       setTimeData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
