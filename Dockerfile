@@ -1,4 +1,4 @@
-FROM node:20.18.0
+FROM node:20.18.0 AS builder
 
 WORKDIR /app
 
@@ -8,6 +8,9 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD [ "npm", "start" ]
+
+FROM nginx:1.27.4
+
+COPY --from=builder /app/build /usr/share/nginx/html
